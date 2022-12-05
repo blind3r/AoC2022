@@ -22,9 +22,6 @@ public class Day2 {
     }
 
     public int solve(int part) {
-        String i = "A Y\n" +
-                "B X\n" +
-                "C Z";
         Scanner scanner = new Scanner(input);
         String token;
         int score = 0;

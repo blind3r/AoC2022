@@ -20,10 +20,14 @@ public class AoC {
         Day3 day3 = new Day3(parseFile(FILE_PATH + "input3.txt"));
         System.out.println("Day 3 part 1: " + day3.solve(1));
         System.out.println("Day 3 part 2: " + day3.solve(2));
-*/
+
         Day4 day4 = new Day4(parseFile(FILE_PATH + "input4.txt"));
         System.out.println("Day 4 part 1: " + day4.solve(1));
         System.out.println("Day 4 part 2: " + day4.solve(2));
+*/
+        Day6 day6 = new Day6(parseFile(FILE_PATH + "input6.txt"));
+        System.out.println("Day 6 part 1: " + day6.solve(1));
+        System.out.println("Day 6 part 2: " + day6.solve(2));
     }
 
     private static String parseFile(String fileName) {

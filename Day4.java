@@ -44,7 +44,11 @@ public class Day4 {
         return 0;
     }
 
+<<<<<<< Updated upstream
     int overlap(String[] one, String[] two) {
+=======
+    int overlap (String[] one, String[] two) {
+>>>>>>> Stashed changes
         int[] oneInt = new int[one.length], twoInt = new int[two.length];
         convertStringToInt(one, two, oneInt, twoInt);
 

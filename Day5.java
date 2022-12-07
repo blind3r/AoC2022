@@ -2,16 +2,15 @@ import java.util.*;
 
 public class Day5 {
 
-    static final String DEFAULT_INPUT =
-                    "    [D]    \n" +
-                    "[N] [C]    \n" +
-                    "[Z] [M] [P]\n" +
-                    " 1   2   3 \n" +
-                    "\n" +
-                    "move 1 from 2 to 1\n" +
-                    "move 3 from 1 to 3\n" +
-                    "move 2 from 2 to 1\n" +
-                    "move 1 from 1 to 2";
+    static final String DEFAULT_INPUT = "    [D]    \n" +
+            "[N] [C]    \n" +
+            "[Z] [M] [P]\n" +
+            " 1   2   3 \n" +
+            "\n" +
+            "move 1 from 2 to 1\n" +
+            "move 3 from 1 to 3\n" +
+            "move 2 from 2 to 1\n" +
+            "move 1 from 1 to 2";
     String input = DEFAULT_INPUT;
 
     Map<Integer, List<Character>> crates = new HashMap<Integer, List<Character>>();
@@ -42,7 +41,7 @@ public class Day5 {
 
     String printTopCrates() {
         String topCrates = "";
-        for (List<Character> stack: crates.values()) {
+        for (List<Character> stack : crates.values()) {
             topCrates += getTopCrate(stack, false);
         }
         return topCrates;
@@ -55,42 +54,32 @@ public class Day5 {
         Scanner scanner = new Scanner(token).useDelimiter("\\D+");
         quantity = scanner.nextInt();
         from = scanner.nextInt();
-        to  = scanner.nextInt();
+        to = scanner.nextInt();
 
-        if(part == 1) {
+        if (part == 1) {
             for (int i = 0; i < quantity; i++) {
                 Character top = getTopCrate(crates.get(from), true);
-                addToTop(crates.get(to), top);
+                crates.get(to).add(0, top);
             }
         } else {
-
+            List<Character> top = getTopCrates(crates.get(from), quantity, true);
+            addMultipleToTop(crates.get(to), top);
         }
     }
 
-    void addToTop(List<Character> toStack, Character top) {
-        Character c;
-        for (int i = 0; i < toStack.size(); i++) {
-            c = toStack.get(i);
-            if (i == 0 && c != ' ') {
-                toStack.add(0, top);
-                balanceCrates(toStack.size());
-                break;
-            } else if (c != ' ') {
-                toStack.set(i - 1, top);
-                break;
-            } else if (i == toStack.size() - 1){
-                toStack.set(toStack.size() - 1, top);
-                break;
-            }
-        }
+    void addMultipleToTop(List<Character> toStack, List<Character> top) {
+        toStack.addAll(0,top);
     }
 
-    void balanceCrates(int newSize){
-        for (List<Character> crate :crates.values()) {
-            if(crate.size() < newSize){
-                crate.add(0, ' ');
-            }
+    List<Character> getTopCrates(List<Character> from, int quantity, boolean clean) {
+        List<Character> crates = new LinkedList<>();
+
+        for (int j = 0; j < quantity; j++) {
+            crates.add(from.get(clean ? 0 : j));
+            if (clean)
+                from.remove(0);
         }
+        return crates;
     }
 
     Character getTopCrate(List<Character> fromStack, boolean clean) {
@@ -98,14 +87,13 @@ public class Day5 {
         for (int i = 0; i < fromStack.size(); i++) {
             c = fromStack.get(i);
             if (c != ' ') {
-                if(clean)
-                    fromStack.set(i,' ');
+                if (clean)
+                    fromStack.remove(i);
                 return c;
             }
         }
         return 0;
     }
-
 
     void printCrates(Map<Integer, List<Character>> crates) {
         StringBuilder sb = new StringBuilder();
@@ -135,7 +123,10 @@ public class Day5 {
             if (crates.get(f) == null) {
                 crates.put(f, new ArrayList<Character>());
             }
-            crates.get(f).add(token.charAt(i));
+            char z = token.charAt(i);
+            if (z != 32) {
+                crates.get(f).add(z);
+            }
         }
     }
 }

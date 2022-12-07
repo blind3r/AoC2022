@@ -1,15 +1,8 @@
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Day4 {
 
-    String input = "2-4,6-8\n" +
-            "2-3,4-5\n" +
-            "5-7,7-9\n" +
-            "2-8,3-7\n" +
-            "6-6,4-6\n" +
-            "2-6,4-8";
+    String input;
 
     public Day4(String input) {
         this.input = input;
@@ -28,7 +21,7 @@ public class Day4 {
             one = pair[0].split("-");
             two = pair[1].split("-");
 
-            if(part == 1) {
+            if (part == 1) {
                 total += rangeContainsOther(one, two);
             } else {
                 total += overlap(one, two);
@@ -51,16 +44,7 @@ public class Day4 {
         return 0;
     }
 
-    /*
-2-4,6-8
-2-3,4-5
-5-7,7-9
-2-8,3-7
-6-6,4-6
-2-6,4-8
-     */
-
-    int overlap (String[] one, String[] two) {
+    int overlap(String[] one, String[] two) {
         int[] oneInt = new int[one.length], twoInt = new int[two.length];
         convertStringToInt(one, two, oneInt, twoInt);
 

@@ -3,22 +3,21 @@ import java.util.Scanner;
 public class Day6 {
 
     String input;
-
+    int BUFFER_SIZE;
+    
     public Day6(String input) {
         this.input = input;
     }
-
-    ; 
 
     public int solve(int part) {
         Scanner scanner = new Scanner(input);
         String token;
         int marker = 0, bufferIndex = 0;
-        int BUFFER_SIZE;
+        
 
-        if(part == 1){
+        if (part == 1) {
             BUFFER_SIZE = 4;
-        } else{
+        } else {
             BUFFER_SIZE = 14;
         }
 
@@ -49,7 +48,7 @@ public class Day6 {
     int purgeBuffer(char c, char[] buffer) {
         for (int i = 0; i < buffer.length; i++) {
             if (buffer[i] == c) {
-                for (int j = 0; j < BUFFER_SIZE-1 && i + j + 1 < BUFFER_SIZE; j++) {
+                for (int j = 0; j < BUFFER_SIZE - 1 && i + j + 1 < BUFFER_SIZE; j++) {
                     buffer[j] = buffer[i + j + 1];
                 }
 
@@ -63,7 +62,7 @@ public class Day6 {
             } else {
                 buffer[offset++] = c;
                 int z = offset;
-                while (z < BUFFER_SIZE-1) {
+                while (z < BUFFER_SIZE - 1) {
                     buffer[z] = 0;
                     z++;
                 }
